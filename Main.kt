@@ -1,96 +1,71 @@
-// want to add basic validation errors for website
-
 fun main() {
     val email = "tester@example.com"
-    if (!email.contains()"@)) {
-        println("This is an Invalid email address: missing: @)
-    } else {
-        println("Email is valid")
-    }
-// this is for missing '@' in an email address
-// Length validation
-    if (name.length < 2) {
-        println("Your name must be at least 2 letters!")
-    } else {
-        println("Name is valid")
-    }
+    val name = "John"
+    val surname = "Doe"
+    val password = "Password1!"
 
-    if (surname.length < 2) {
-        println("Your surname must be at least 2 letters!")
-    } else {
-        println("Surname is valid")
-    }
+    var isValid = true  // tracks overall validity
 
-// Numbers in name validation
-    if (name.any { it.isDigit() }) {
-        println("Your name cannot contain numbers!")
-    } else {
-        println("Name is valid")
-    }
-
-// Numbers in surname validation
-    if (surname.any { it.isDigit() }) {
-        println("Your surname cannot contain numbers!")
-    } else {
-        println("Surname is valid")
-    }
-
-// Validate password not being empty
-    if (password.isEmpty()) {
-        println("Password cannot be empty!")
-    } else {
-        println("Password is valid")
-    }
-
-// Validate password length
-    if password.length < 8) {
-        println("Password must be at least 8 characters long!")
-    } else {
-        println("Password is valid")
-    }
-
-// Validate email containing "."
-    if (!email.contains(".")) {
-        println("This is an invalid email address: missing '.'")
-    } else {
-        println("Email is valid")
-    }
-
-// Validate email not being empty
+    // Email validations
     if (email.isEmpty()) {
         println("Email cannot be empty!")
-    } else {
-        println("Email is valid")
+        isValid = false
     }
-
-//  Validate password containing an uppercase letter
-    if (!password.any { it.isUpperCase() }) {
-        println("Password must contain at least one uppercase letter!")
-    } else {
-        println("Password is valid")
-    }
-
-// Validate password containing a lowercase letter
-    if (!password.any { it.isLowerCase() }) {
-        println("Password must contain at least one lowercase letter!")
-    } else {
-        println("Password is valid")
-    }
-
-// Validate email not having a blank space
     if (email.contains(" ")) {
         println("Email cannot contain blank spaces!")
+        isValid = false
+    }
+    if (!email.contains("@")) {
+        println("Invalid email address: missing '@'")
+        isValid = false
+    }
+    if (!email.contains(".")) {
+        println("Invalid email address: missing '.'")
+        isValid = false
+    }
+
+    // Name validations
+    if (name.length < 2) {
+        println("Your name must be at least 2 letters!")
+        isValid = false
+    }
+    if (name.any { it.isDigit() }) {
+        println("Your name cannot contain numbers!")
+        isValid = false
+    }
+
+    // Surname validations
+    if (surname.length < 2) {
+        println("Your surname must be at least 2 letters!")
+        isValid = false
+    }
+    if (surname.any { it.isDigit() }) {
+        println("Your surname cannot contain numbers!")
+        isValid = false
+    }
+
+    // Password validations
+    if (password.isEmpty()) {
+        println("Password cannot be empty!")
+        isValid = false
+    }
+    if (password.length < 8) {
+        println("Password must be at least 8 characters long!")
+        isValid = false
+    }
+    if (!password.any { it.isUpperCase() }) {
+        println("Password must contain at least one uppercase letter!")
+        isValid = false
+    }
+    if (!password.any { it.isLowerCase() }) {
+        println("Password must contain at least one lowercase letter!")
+        isValid = false
+    }
+
+    // Final result
+    if (isValid) {
+        println("Login successful! Welcome, $name $surname")
     } else {
-        println("Email is valid")
+        println("Login failed. Please fix the errors above.")
     }
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-
 }
-
