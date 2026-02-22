@@ -1,57 +1,71 @@
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.application.*
-import io.ktor.server.routing.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
-import io.ktor.server.http.content.*
-
 fun main() {
-    embeddedServer(Netty, port = 8080) {
-        module()
-    }.start(wait = true)
-}
+    val email = "tester@example.com"
+    val name = "John"
+    val surname = "Doe"
+    val password = "Password1!"
 
-fun Application.module() {
+    var isValid = true  // tracks overall validity
 
-    routing {
+    // Email validations
+    if (email.isEmpty()) {
+        println("Email cannot be empty!")
+        isValid = false
+    }
+    if (email.contains(" ")) {
+        println("Email cannot contain blank spaces!")
+        isValid = false
+    }
+    if (!email.contains("@")) {
+        println("Invalid email address: missing '@'")
+        isValid = false
+    }
+    if (!email.contains(".")) {
+        println("Invalid email address: missing '.'")
+        isValid = false
+    }
 
-        // Serve your static HTML files from resources/static
-        staticResources("/", "static")
+    // Name validations
+    if (name.length < 2) {
+        println("Your name must be at least 2 letters!")
+        isValid = false
+    }
+    if (name.any { it.isDigit() }) {
+        println("Your name cannot contain numbers!")
+        isValid = false
+    }
 
-        // Handle signup form submission
-        post("/signup") {
+    // Surname validations
+    if (surname.length < 2) {
+        println("Your surname must be at least 2 letters!")
+        isValid = false
+    }
+    if (surname.any { it.isDigit() }) {
+        println("Your surname cannot contain numbers!")
+        isValid = false
+    }
 
-            val params = call.receiveParameters()
+    // Password validations
+    if (password.isEmpty()) {
+        println("Password cannot be empty!")
+        isValid = false
+    }
+    if (password.length < 8) {
+        println("Password must be at least 8 characters long!")
+        isValid = false
+    }
+    if (!password.any { it.isUpperCase() }) {
+        println("Password must contain at least one uppercase letter!")
+        isValid = false
+    }
+    if (!password.any { it.isLowerCase() }) {
+        println("Password must contain at least one lowercase letter!")
+        isValid = false
+    }
 
-            val name = params["name"] ?: ""
-            val surname = params["surname"] ?: ""
-            val email = params["email"] ?: ""
-            val address = params["address"] ?: ""
-
-            // Basic validation
-            if (!email.contains("@")) {
-                call.respondText("Invalid email address: missing @")
-                return@post
-            }
-
-            if (name.length < 2) {
-                call.respondText("First name must be at least 2 characters")
-                return@post
-            }
-
-            if (surname.length < 2) {
-                call.respondText("Last name must be at least 2 characters")
-                return@post
-            }
-
-            if (address.length < 5) {
-                call.respondText("Please enter a valid address")
-                return@post
-            }
-
-            // If everything is valid
-            call.respondText("Signup successful!")
-        }
+    // Final result
+    if (isValid) {
+        println("Login successful! Welcome, $name $surname")
+    } else {
+        println("Login failed. Please fix the errors above.")
     }
 }
