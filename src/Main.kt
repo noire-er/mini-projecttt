@@ -16,10 +16,10 @@ fun Application.module() {
 
     routing {
 
-        // Serve static HTML files
+        // Serve your static HTML files from resources/static
         staticResources("/", "static")
 
-        // Handle signup form
+        // Handle signup form submission
         post("/signup") {
 
             val params = call.receiveParameters()
@@ -27,25 +27,31 @@ fun Application.module() {
             val name = params["name"] ?: ""
             val surname = params["surname"] ?: ""
             val email = params["email"] ?: ""
+            val address = params["address"] ?: ""
 
-            // Validation
+            // Basic validation
             if (!email.contains("@")) {
                 call.respondText("Invalid email address: missing @")
                 return@post
             }
 
             if (name.length < 2) {
-                call.respondText("Name must be at least 2 letters")
+                call.respondText("First name must be at least 2 characters")
                 return@post
             }
 
             if (surname.length < 2) {
-                call.respondText("Surname must be at least 2 letters")
+                call.respondText("Last name must be at least 2 characters")
                 return@post
             }
 
+            if (address.length < 5) {
+                call.respondText("Please enter a valid address")
+                return@post
+            }
+
+            // If everything is valid
             call.respondText("Signup successful!")
         }
     }
 }
-
