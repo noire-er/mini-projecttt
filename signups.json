@@ -12,5 +12,19 @@
     "email": "erion393939@gmail.com",
     "address": "60 Priory Avenue",
     "password_hash": "7acd17bf305447c5f82361a3ea0a20a2ebcf8fb8373c67746bc6a807e78afc5f"
+  },
+  {
+    "name": "Test",
+    "surname": "User",
+    "email": "test@example.com",
+    "address": "Addr",
+    "password_hash": "1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b"
+  },
+  {
+    "name": "Erion",
+    "surname": "Rashica",
+    "email": "erion393939@gmail.com",
+    "address": "erion393939@gmail.com",
+    "password_hash": "7acd17bf305447c5f82361a3ea0a20a2ebcf8fb8373c67746bc6a807e78afc5f"
   }
 ]
